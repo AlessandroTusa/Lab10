@@ -1,23 +1,32 @@
 package it.polito.tdp.porto.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import it.polito.tdp.porto.db.PortoDAO;
+
 public class Paper {
 
 	private int eprintid;
 	private String title;
-	private String issn;
-	private String publication;
-	private String type;
-	private String types;
+	private PortoDAO dao;
+	private List<Author> collaboratori;
 
-	public Paper(int eprintid, String title, String issn, String publication, String type, String types) {
+	public Paper(int eprintid, String title) {
 		this.eprintid = eprintid;
 		this.title = title;
-		this.issn = issn;
-		this.publication = publication;
-		this.type = type;
-		this.types = types;
+		this.collaboratori= new ArrayList<>();
 	}
-
+	public void addList() {
+		this.dao= new PortoDAO();
+		this.collaboratori.addAll(this.dao.getCollaboratori(this.getEprintid()));
+	}
+	
+	public int getSizeList(){
+	return this.collaboratori.size();
+	}
 	public int getEprintid() {
 		return eprintid;
 	}
@@ -34,42 +43,11 @@ public class Paper {
 		this.title = title;
 	}
 
-	public String getIssn() {
-		return issn;
-	}
-
-	public void setIssn(String issn) {
-		this.issn = issn;
-	}
-
-	public String getPublication() {
-		return publication;
-	}
-
-	public void setPublication(String pubblication) {
-		this.publication = pubblication;
-	}
 	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getTypes() {
-		return types;
-	}
-
-	public void setTypes(String types) {
-		this.types = types;
-	}
 
 	@Override
 	public String toString() {
-		return "Paper [eprintid=" + eprintid + ", title=" + title + ", issn=" + issn + ", publication=" + publication
-				+ ", type=" + type + ", types=" + types + "]";
+		return "Paper [eprintid=" + eprintid + ", title=" + title ;
 	}
 
 	@Override
@@ -92,6 +70,12 @@ public class Paper {
 		if (eprintid != other.eprintid)
 			return false;
 		return true;
+	}
+
+
+	public boolean isCollaboratore(Author a) {
+		if(this.collaboratori.contains(a)) return true;
+		return false;
 	}
 	
 	

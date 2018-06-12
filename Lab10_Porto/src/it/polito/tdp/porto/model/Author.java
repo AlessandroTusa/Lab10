@@ -1,16 +1,21 @@
 package it.polito.tdp.porto.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Author {
 
 	private int id;
 	private String lastname;
 	private String firstname;
+	private List<Author> lista;
 		
 	public Author(int id, String lastname, String firstname) {
 		super();
 		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
+		this.lista= new ArrayList<>();
 	}
 
 	public int getId() {
@@ -67,6 +72,15 @@ public class Author {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public void setList(List<Author> amici) {
+		this.lista.addAll(amici);		
+	}
+
+	public List<Author> getList() {
+		// TODO Auto-generated method stub
+		return this.lista;
 	}
 	
 	
