@@ -11,7 +11,6 @@ public class Author {
 	private List<Author> lista;
 		
 	public Author(int id, String lastname, String firstname) {
-		super();
 		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
